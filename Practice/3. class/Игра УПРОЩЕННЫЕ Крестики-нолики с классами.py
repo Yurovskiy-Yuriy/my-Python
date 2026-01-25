@@ -67,26 +67,23 @@ O поставил в 3
  4 | X | 6
 ---------
  7 | 8 | 9
+'''
 
-План:
-ШАГ 1: Board с print_board() + make_move()
-ШАГ 2: check_winner()  
-ШАГ 3: play_round() без проверки победы
-ШАГ 4: Добавить check_winner() в play_round()
-ШАГ 5: Цикл до победы/ничьей'''
 import random
 
 class Board:
     def __init__(self):
-        self.cells = ['1','2','3','4','5','6','7','8','9']
-        #self.full = ['0','1','2','3','4','5','6','7','8'] # пустые клетки
-        self.full = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        self.cells = ['1','2','3','4','5','6','7','8','9'] # визуальное отображение поля
+        self.full = ['1','2','3','4','5','6','7','8','9'] # пустые клетки
+        self.go_player = [] # все хода игрока
+        self.go_computer = [] # все хода компьютера
+        self.winner_list = ({'1','2','3'}, {'4','5','6'}, {'7','8','9'}, {'1','4','7'}, {'2','5','8'}, {'3','6','9'}, {'1','5','9'}, {'3','5','7'})
 
     def is_full(self, position): # учет пустых клеток
         self.full.remove(position)
     
     def make_move(self, position, symbol): # меняем цифры на доске с учетом ходов
-        self.cells[position - 1] = symbol
+        self.cells[int(position) - 1] = symbol
     
     def print_board(self):
         print(f' {self.cells[0]} | {self.cells[1]} | {self.cells[2]}')
@@ -94,24 +91,53 @@ class Board:
         print(f' {self.cells[3]} | {self.cells[4]} | {self.cells[5]}')
         print('----------')
         print(f' {self.cells[6]} | {self.cells[7]} | {self.cells[8]}')
-        
+              
 class TicTacToe:
     def __init__(self):
         self.board = Board()
-
+        self.end = False
+  
+    def winner(self, list_):   # проверка на победу или ничью
+        for x in self.board.winner_list:
+            if x.issubset(set(list_)):
+                if list_ == self.board.go_player:
+                    print('')
+                    print("Ты победил!!!")
+                    self.end = True                       
+                elif list_ == self.board.go_computer:
+                    print('')
+                    print("Поражение!!! Победил компьютер")
+                    self.end = True 
+                elif len(self.board.full) == 0:
+                    print('')
+                    print("Ничья!!!")
+                    self.end = True 
+         
     def play_round(self):
         self.board.print_board()
-        player_move =  input('Твой ход:')    # запрос хода у человека 
-        while (player_move - 1) in self.board.full:
-            player_move = input('Клетка занята, повтори ход: ')
-        #computer_move = random.choice(self.board.full)  # ход компьютера
-       
-
+        
+        while self.end == False:
+            print('')
+            player_move =  input('Твой ход:')    # запрос хода у человека 
+            while player_move not in self.board.full: # проверка правильности хода
+                player_move = input('Клетка занята, повтори ход: ')
+            
+            self.board.make_move(player_move, 'X')  # ставим на доске 'X'
+            self.board.full.remove(player_move) # удаляем эллемент из возможных следующих ходов
+            self.board.go_player.append(player_move) # добавляем в список ход человека
+            self.winner(self.board.go_player) # проверка на победу
+            
+            if self.end == True:
+                self.board.print_board()
+                break 
+            
+            computer_move = random.choice(self.board.full)  # ход компьютера
+            
+            self.board.make_move(computer_move, 'O') # ставим на доске 'O'
+            self.board.full.remove(computer_move) # удаляем эллемент из возможных следующих ходов
+            self.board.go_computer.append(computer_move) # добавляем в список ход компьютера
+            self.winner(self.board.go_computer) # проверка на победу
+            self.board.print_board()
+        
 game = TicTacToe()
 game.play_round()
-
-
-a = ['1', '2', '3', '4', '5']
-b = ['1', '2', '5']
-if set(b).issubset(set(a)):
-    print("Все элементы b есть в a")  # Truм
