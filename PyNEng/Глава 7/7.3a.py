@@ -14,31 +14,18 @@
 
 '''
 
-with open(r'D:\soft\DAEMON_Tools\5\7\CAM_table.txt') as f:
+with open(r'D:\CAM_table.txt') as f:
           lines = []  # Список для хранения нужных строк
         
           for line in f:
-              if str(line.count('.')) == str(2): # Условие проверки наличия двух точек
-                  parts = line.split()
-                  vlan_number = int(parts[0])   # Преобразование первой части строки (VLAN) в целое число
-                  
+              if line.count('.') == 2: # Условие проверки наличия двух точек
+                  parts = line.split()  # ['100', '01bb.c580.7000', 'DYNAMIC', 'Gi0/1']
+                  vlan_number = int(parts[0])   # 100 
                   # Добавление кортежа: (номер VLAN, сама строка)
-                  lines.append((vlan_number, line.rstrip()))
-                 
+                  lines.append((vlan_number, line.rstrip())) # [(100, ' 100    01bb.c580.7000    DYNAMIC     Gi0/1')]
+              
+lines.sort(key=lambda x: x[0]) # Сортировка кортежа по номеру VLAN
 
-# Сортировка по номеру VLAN
-lines.sort(key=lambda x: x[0])
+for vlan_number, line in lines:  #
+    print(line.replace('DYNAMIC', ''))  # игнорируем vlan_number
 
-for _, line in lines:
-    print(line.replace('DYNAMIC', ''))
-
-
-
-                  
-#                  vlans.append(line.strip().replace('DYNAMIC', '').rstrip())
-#                  number = vlans.split()
-                  #print(line.rstrip().replace('DYNAMIC', ''))
-#output = "\n".join(vlans)
-
-#print(vlans)
-#print(output)

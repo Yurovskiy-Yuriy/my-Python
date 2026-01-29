@@ -3,40 +3,27 @@
 Переделать скрипт:
 • Запросить у пользователя ввод номера VLAN.
 • Выводить информацию только по указанному VLAN.
-
 Пример работы скрипта:
-
 Enter VLAN number: 10
-10      0a1b.1c80.7000      Gi0/4
-10      01ab.c5d0.70d0      Gi0/8
+10 0a1b.1c80.7000 Gi0/4
+10 01ab.c5d0.70d0 Gi0/8
+Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
+enter_vlan = input('Enter VLAN number: ')
 
-vl = input('Введите номер VLAN: ')
-
-with open(r'D:\soft\DAEMON_Tools\5\7\CAM_table.txt') as f:
+with open(r'D:\CAM_table.txt') as f:
           lines = []  # Список для хранения нужных строк
         
           for line in f:
-              if str(line.count('.')) == str(2): # Условие проверки наличия двух точек
-                  parts = line.split()
-                  vlan_number = int(parts[0])   # Преобразование первой части строки (VLAN) в целое число
-                  
+              if line.count('.') == 2: # Условие проверки наличия двух точек
+                  parts = line.split()  # ['100', '01bb.c580.7000', 'DYNAMIC', 'Gi0/1']
+                  vlan_number = int(parts[0])   # 100 
                   # Добавление кортежа: (номер VLAN, сама строка)
-                  lines.append((vlan_number, line.rstrip()))
-                 
+                  lines.append((vlan_number, line.rstrip())) # [(100, ' 100    01bb.c580.7000    DYNAMIC     Gi0/1')]
+              
+lines.sort(key=lambda x: x[0]) # Сортировка кортежа по номеру VLAN
 
-# Сортировка по номеру VLAN
-lines.sort(key=lambda x: x[0])
-#print(lines[0][0])
+for vlan_number, line in lines:  
+    if int(vlan_number) == int(enter_vlan):
+        print(line.replace('DYNAMIC', ''))  # игнорируем vlan_number
 
-i = 0    
-for __, line in lines: 
-    if int(lines[i][0]) == int(vl):
-       # print(lines[i][0])
-        print(line.replace('DYNAMIC', ''))
-    i += 1
-        
-
-
-
-            
