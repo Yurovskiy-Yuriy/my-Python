@@ -54,8 +54,9 @@ def generate_trunk_config(intf_vlan_mapping, trunk_template):
         for x in trunk_template:
             if 'allowed vlan' in x:
                 x += ' '
-                for z in vl:
+                for z in vl:   # перебираем VLAN
                     x += str(z) + ','
+                x = x[:-1]  # убираем последнюю запятую
                 result.append(x)
             else:
                 result.append(x)               
@@ -63,5 +64,5 @@ def generate_trunk_config(intf_vlan_mapping, trunk_template):
 
 print(generate_trunk_config(intf_vlan_mapping, trunk_mode_template))
 
-for x in generate_trunk_config(intf_vlan_mapping, trunk_mode_template):
-    print(x)
+# for x in generate_trunk_config(intf_vlan_mapping, trunk_mode_template):
+#     print(x)
