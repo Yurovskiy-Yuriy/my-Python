@@ -14,7 +14,7 @@ from netmiko import ConnectHandler
 from paramiko.ssh_exception import AuthenticationException, SSHException
 from netmiko import NetMikoTimeoutException
 
-def send_show_command(device_params, commands):
+def send_config_commands(device_params, commands):
     result = {}
     try:
         with ConnectHandler(**device_params) as ssh:
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         devices = yaml.safe_load(f)
         
     for dev in devices:
-        output = send_show_command(dev, command)
+        output = send_config_commands(dev, command)
         pprint(output)
 
     
