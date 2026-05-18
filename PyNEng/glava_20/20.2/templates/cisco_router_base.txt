@@ -1,0 +1,10 @@
+{# Файл: templates/cisco_router_base.txt #}
+
+{# Включаем базовую конфигурацию #}
+{% include '20.2/templates/cisco_base.txt' %}
+
+{# Включаем алиасы #}
+{% include '20.2/templates/alias.txt' %}
+
+{# Включаем конфигурацию EEM для описания интерфейсов #}
+{% include '20.2/templates/eem_int_desc.txt' %}

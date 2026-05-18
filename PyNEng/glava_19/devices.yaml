@@ -1,0 +1,21 @@
+- device_type: linux
+  host: 192.168.100.1
+  username: adm
+  password: cisco
+  secret: 
+  timeout: 10
+  #fast_cli: true
+- device_type: linux
+  host: 192.168.100.2
+  username: adm
+  password: cisco
+  secret: 
+  timeout: 10
+  #fast_cli: true
+- device_type: linux
+  host: 192.168.100.3
+  username: adm
+  password: cisco
+  secret: 
+  timeout: 10
+  #fast_cli: true

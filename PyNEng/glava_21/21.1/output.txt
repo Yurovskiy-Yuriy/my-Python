@@ -1,0 +1,6 @@
+Router#sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol
+FastEthernet0/0        192.168.2.77    YES manual up                    up
+FastEthernet1/0        192.168.1.25    YES manual up                    up
+FastEthernet2/0        unassigned      YES unset administratively down  down
+FastEthernet3/0        unassigned      YES unset administratively down  down

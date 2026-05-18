@@ -1,0 +1,27 @@
+{# Подстановка элемента списка #}
+router ospf {{ process }}
+ router-id {{ router_id }}
+auto-cost reference-bandwidth {{ ref_bw }}
+
+{# Цикл по словарю #}
+{# Генерация network для всех интерфейсов #}
+{% for intf in ospf_intf -%}
+ network {{ intf.ip }} 0.0.0.0 area {{ intf.area }}
+{% endfor %}
+
+{# Генерация passive-interface только для пассивных интерфейсов #}
+{% for intf in ospf_intf -%}
+ {% if intf.passive %}
+ passive-interface {{ intf.name }}
+ {%- endif %}
+{%- endfor %}
+
+{# Блок команд в режиме конфигурации интерфейсов #}
+{% for intf in ospf_intf -%}
+{% if not intf.passive %}
+ interface {{ intf.name }}
+  ip ospf hello-interval 1
+{%- endif %}
+{%- endfor %}
+!
+

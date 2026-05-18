@@ -1,0 +1,4 @@
+interface ethernet {{ unique_port }}
+description {{ des_ip_1 }}
+ip address {{ int_ip_1 }}
+
