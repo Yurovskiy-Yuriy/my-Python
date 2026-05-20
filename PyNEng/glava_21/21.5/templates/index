@@ -1,0 +1,6 @@
+Template, Hostname, Vendor, Command
+sh_cdp_n_det.template, .*, cisco_ios, show cdp neighbors detail
+sh_clock.template, .*, cisco_ios, show clock
+sh_ip_int_br.template, .*, cisco_ios, show ip interface brief
+sh_ip_route_ospf.template, .*, cisco_ios, show ip route ospf
+sh_version.template, .*, cisco_ios, show version

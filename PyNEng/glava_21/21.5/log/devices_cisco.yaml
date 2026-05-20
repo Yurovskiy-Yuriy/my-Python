@@ -1,0 +1,21 @@
+- device_type: cisco
+  host: 192.168.1.10
+  username: root
+  password: root
+  secret: 
+  timeout: 10
+  #fast_cli: true
+- device_type: cisco
+  host: 192.168.1.11
+  username: root
+  password: root
+  secret: 
+  timeout: 10
+  #fast_cli: true
+- device_type: cisco
+  host: 192.168.1.12
+  username: root
+  password: root
+  secret: 
+  timeout: 10
+  #fast_cli: true

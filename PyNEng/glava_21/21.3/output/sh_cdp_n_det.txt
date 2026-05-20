@@ -1,0 +1,16 @@
+-------------------------
+Device ID: SW1
+Entry address(es):
+  IP address: 192.168.1.2
+Platform: Cisco WS-C2960-24TT-L,  Capabilities: Switch
+Interface: GigabitEthernet0/1,  Port ID (outgoing port): GigabitEthernet0/24
+Holdtime : 135 sec
+Version :
+Cisco IOS Software, C2960 Software (C2960-LANBASEK9-M), Version 15.0(2)SE, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2013 by Cisco Systems, Inc.
+Compiled Wed 27-Feb-13 14:29 by prod_rel_team
+advertisement version: 2
+Duplex: full
+Management address(es):
+  IP address: 192.168.1.2

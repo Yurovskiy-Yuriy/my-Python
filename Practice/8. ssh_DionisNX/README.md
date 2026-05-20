@@ -3,24 +3,29 @@
 Скрипты для автоматизации сетевых устройств (Dionis NX / Linux-based) с использованием трёх библиотек.
 
 ```
-├── netmiko_script.py # Netmiko (рекомендуется)
-├── paramiko_script.py # Paramiko (низкоуровневый SSH)
-├── scrapli_script.py # Scrapli (асинхронный подход)
+├── ssh_connect_DionisNX_(Netmiko) (рекомендуется)
+├── ssh_connect_DionisNX_(Paramiko).py (низкоуровневый SSH)
+├── ssh_connect_DionisNX_(Scrapli).py (асинхронный подход)
+├──ssh_connect_Cisco_(Netmiko).py
 ├── dionis_single_thread.py
 ├── dionis_multithread.py
-└── dionis_auto_connect
-    ├── data_files
-    |      └── devices.yaml
-    ├── templates
-    |     ├──  dst_template.txt
-    |     └──  src_template.txt
-    └── main.py
+├── dionis_auto_connect
+|   ├── data_files
+|   |      └── devices.yaml
+|   ├── templates
+|   |     ├──  dst_template.txt
+|   |     └──  src_template.txt
+|   └── main.py
+└── network_device_parse
+     |   ├── log
+     |   └── templates
+     └── main.py
 ```
 
-### netmiko_script.py, paramiko_script.py, scrapli_script.py
+### ssh_connect_DionisNX_(Netmiko), ssh_connect_DionisNX_(Paramiko).py, ssh_connect_DionisNX_(Scrapli).py, ssh_connect_Cisco_(Netmiko).py
 
 Назначение:
-Все три скрипта выполняют **одни и те же задачи**, но разными способами:
+Все четыре скрипта выполняют **одни и те же задачи**, но разными способами:
 - Читают конфигурацию устройств из файла `devices_3.yaml`
 - Подключаются к каждому устройству по SSH
 - Выполняют команды `show` и `show version`
@@ -55,4 +60,16 @@
 команды для назначения IP-адресов из одной подсети (192.168.100.1/30 и 192.168.100.2/30) 
 на найденные свободные порты, обеспечивая тем самым прямую IP-связность между маршрутизаторами.
 Таким образом, скрипт полностью автоматизирует процесс создания сети между двумя роутерами без ручного вмешательства.
+
+### network_device_parse
+Скрипт позволяет выбрать команду, отправить её одновременно на несколько устройств 
+(используя многопоточность) и получить результат в виде структурированных данных,
+(производится парсинга текстовых выводов команд по шаблонам).
+
+1. пользователь выбирает нужную команду из интерактивного меню.
+
+2. Многопоточность: быстрая параллельная работа с большим количеством устройств.
+
+3. Структурированный вывод: парсинг полученных данных в формат списка словарей 
+   для удобства дальнейшей обработки.
 

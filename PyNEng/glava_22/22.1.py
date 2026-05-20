@@ -1,0 +1,67 @@
+"""
+Создать класс Topology, который представляет топологию сети.
+
+При создании экземпляра класса, как аргумент передается словарь,
+который описывает топологию. Словарь может содержать "дублирующиеся" соединения.
+Тут "дублирующиеся" соединения, это ситуация когда в словаре есть два соединения:
+    ("R1", "Eth0/0"): ("SW1", "Eth0/1")
+    ("SW1", "Eth0/1"): ("R1", "Eth0/0")
+
+Задача оставить только один из этих линков в итоговом словаре, не важно какой.
+
+В каждом экземпляре должна быть создана переменная topology, в которой содержится
+словарь топологии, но уже без "дублей". Переменная topology должна содержать словарь
+без "дублей" сразу после создания экземпляра.
+
+Пример создания экземпляра класса:
+In [2]: top = Topology(topology_example)
+
+После этого, должна быть доступна переменная topology:
+
+In [3]: top.topology
+Out[3]:
+{('R1', 'Eth0/0'): ('SW1', 'Eth0/1'),
+ ('R2', 'Eth0/0'): ('SW1', 'Eth0/2'),
+ ('R2', 'Eth0/1'): ('SW2', 'Eth0/11'),
+ ('R3', 'Eth0/0'): ('SW1', 'Eth0/3'),
+ ('R3', 'Eth0/1'): ('R4', 'Eth0/0'),
+ ('R3', 'Eth0/2'): ('R5', 'Eth0/0')}
+
+"""
+
+from pprint import pprint
+
+topology_example = {
+    ("R1", "Eth0/0"): ("SW1", "Eth0/1"),
+    ("R2", "Eth0/0"): ("SW1", "Eth0/2"),
+    ("R2", "Eth0/1"): ("SW2", "Eth0/11"),
+    ("R3", "Eth0/0"): ("SW1", "Eth0/3"),
+    ("R3", "Eth0/1"): ("R4", "Eth0/0"),
+    ("R3", "Eth0/2"): ("R5", "Eth0/0"),
+    ("SW1", "Eth0/1"): ("R1", "Eth0/0"),
+    ("SW1", "Eth0/2"): ("R2", "Eth0/0"),
+    ("SW1", "Eth0/3"): ("R3", "Eth0/0"),
+}
+
+class Topology:
+    def __init__(self, topology_dict):
+        # сразу вызывается метод _normalize, который обрабатывает переданный словарь и сохраняет результат в self.topology
+        self.topology = self._normalize(topology_dict) 
+        
+    def _normalize(self, topology_dict):
+        normalized_topology  = {}
+        
+        for key, value in topology_dict.items():  #  ("R1", "Eth0/0")    ("SW1", "Eth0/1")
+   
+                if value not in normalized_topology or normalized_topology[value] != key:
+                    normalized_topology[key] = value
+           
+        return normalized_topology
+    
+    def show_topology(self):
+        pprint(self.topology)
+    
+
+top = Topology(topology_example)
+top.show_topology()
+    
