@@ -134,21 +134,21 @@ my-Python/
 │    ├── 2. Lists and Dictionaries/ # Задачи по спискам и словарям
 │    ├── 3 class/ # Задачи по классам и ООП
 │    ├── 4. OOP_inkaps_polimor # Наследование, инкапсуляция, полиморфизм (лекторы, студенты, оценки)
-│    │        └── 📄 README.md # Описание заданий
+│    │     └── 📄 README.md
 │    ├── 5. Phonebook_Cleaner/ # Форматирование телефонной книги
-│    │        └── 📄 README.md # Описание задания
+│    │     └── 📄 README.md 
 │    ├── 6. PostgreSQL_Python/ # Управление клиентами: добавление, поиск, удаление
-│    │        └── 📄 README.md # Описание заданий
+│    │     └── 📄 README.md 
 │    ├── 7. Python_ORM/ # SQLAlchemy: издатели → книги → продажи → магазины
-│    │        └── 📄 README.md # Описание заданий
+│    │     └── 📄 README.md 
 │    ├── 8. ssh_DionisNX/ # автоматизация сетевых устройств (Dionis NX / Linux-based)
-│    │        └── 📄 README.md # Описание заданий
+│    │     └── 📄 README.md 
 │    ├── 9. Scrapping/ # Web-scrapping
-│    │        └── 📄 README.md # Описание задания
+│    │     └── 📄 README.md 
 │    ├── 10. Decorators/ # Декораторы
-│    │        └── 📄 README.md # Описание заданий
+│    │     └── 📄 README.md 
 │    └── 11. tests/ # Тесты
-│             └── 📄 README.md # Описание заданий
+│          └── 📄 README.md 
 │
 ├── 📄 README.md # Описание проекта (этот файл)
 ├── 📄 .gitignore # Исключения для Git
@@ -156,4 +156,5 @@ my-Python/
 ```
 
 Связаться со мной:  📧 yurovskiy2007@yandex.ru
+
 *Все здесь — это мой публичный конспект ✅
