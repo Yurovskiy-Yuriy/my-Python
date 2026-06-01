@@ -72,17 +72,18 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class CiscoSSH:
     def __init__(self, ip, username, password, secret=None):
+
         # 1. Формируем словарь с параметрами подключения для Netmiko
-        device_params = {
+        self.device_params = {
             "device_type": "linux", 
-            "ip": ip,
+            "host": ip,
             "username": username,
             "password": password,
             "secret": secret, # Пароль для enable
         }
 
         # 2. открываем соединение и переходим в enable
-        self.ssh = ConnectHandler(**device_params)
+        self.ssh = ConnectHandler(**self.device_params)
         self.ssh.enable() 
     
     
@@ -132,21 +133,31 @@ class CiscoSSH:
          
          
     # функция для списка команд config
-    def send_config_commands(self, config_commands):
+    def send_config_commands(self, config_commands, strict):
 
 
          self.ssh.send_command('configure terminal', expect_string=r'#')
          
          # 2. Отправляем список команд конфигурации
          # Используем send_config_set, так как это список команд
-         output = self.ssh.send_config_set(config_commands, exit_config_mode=False)
-         
+         for command in config_commands:
+            try:
+               print(f'Выполнение команды: {command} ....')
+               output = self.ssh.send_config_set(command, exit_config_mode=False)
+
+            except Exception as e:
+               output = self.ssh.send_command_timing('\x03') #Отправляем Ctrl+C (очищаем строку)
+              
+               print(f'При выполнении команды {command} на устройстве {self.device_params["host"]}  возникла ошибка: {e}')
+               
+               if strict:
+                  break
+            
          # 3. Выходим из режима конфигурирования
          self. ssh.send_command('exit', expect_string=r'#')
-         
+            
          return output
 
-      
     # закрываем соединение
     def close(self):
         self.ssh.disconnect()
@@ -160,11 +171,14 @@ if __name__ == '__main__':
     parse = True
     templates = '22.2a/templates/'    # путь к каталогу с шаблонами.
     index = 'index'                   # имя файла, где хранится соответствие между командами и шаблонами.
+    strict = False
     
-    config_commands = ('interface ethernet 9', 'description TEST_TEST_TEST', 'ip address 192.168.55.1/24')
-    
+    commands_with_errors = ['logging 0255.255.1', 'logging', 'a']
+    correct_commands = ['interface ethernet 9', 'description TEST_TEST_TEST', 'ip address 192.168.55.1/24']
+    commands = commands_with_errors+correct_commands
+
     
     mos = CiscoSSH('192.168.10.10', 'admin', 'admin')
-   #  print(mos.send_show_command(parse, templates, index))
-    mos.send_config_commands(config_commands)
+    #  print(mos.send_show_command(parse, templates, index))
+    mos.send_config_commands(commands, strict)
     mos.close()
