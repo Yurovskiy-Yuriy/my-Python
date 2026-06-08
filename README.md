@@ -25,7 +25,7 @@
 | **Codewars** | 5-7 kyu                                                                                                                       | 5-4 kyu                    |
 | **PyNEng**   | Задания 4-23 (✅)                                                                                                     | Глава 24             |
 | **Programs** | IP_Calculator_1.1, EnglishBot  (✅)                                                                                           | -                          |
-| **Practice** | Алгоритмы, списки, классы, ООП, PostgreSQL, ssh, декораторы, Web-scrapping, тесты (✅) | Новые задачи  |
+| **Practice** | Алгоритмы, списки, классы, ООП, PostgreSQL, ssh, декораторы, Web-scrapping, тесты, Django (✅) | Новые задачи  |
 
 ## 🥋 CodeWars
 
@@ -98,6 +98,7 @@
 - [X] Web-скрапинг → 9. Scrapping/
 - [X] Декораторы → 10. Decorators/
 - [X] Тестирование (unittest/pytest) → 11. tests/
+- [X] Веб-фреймворк  → 12. Django/
 
 ## 📖 Мой конспект по Python
 
@@ -153,8 +154,11 @@ my-Python/
 │    │     └── 📄 README.md 
 │    ├── 10. Decorators/ # Декораторы
 │    │     └── 📄 README.md 
-│    └── 11. tests/ # Тесты
-│          └── 📄 README.md 
+│    ├── 11. tests/ # Тесты
+│    │     └── 📄 README.md 
+│    └── 12. Django/ # разработка веб-приложений
+│          ├── recipes/ # простой сервис-помощник для приготовления блюд
+│          └── pagination/ # реализация пагинации по csv-файлу
 │
 ├── 📄 README.md # Описание проекта (этот файл)
 ├── 📄 .gitignore # Исключения для Git
