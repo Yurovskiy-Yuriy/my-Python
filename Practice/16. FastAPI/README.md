@@ -51,27 +51,27 @@ FastAPI автоматически генерирует интерактивну
 
 # Создать объявление
 
-curl -X POST http://localhost:8080/v1/advertisement 
+curl -X POST http://localhost:8080/advertisement 
   -H "Content-Type: application/json" 
   -d '{"title":"Велосипед", "description":"Горный, новый", "price":15000, "author":"Иван"}'
 
 # Получить объявление по ID (например, ID=1)
 
-curl http://localhost:8080/v1/advertisement/1
+curl http://localhost:8080/advertisement/1
 
 # Частично обновить объявление (изменить цену)
 
-curl -X PATCH http://localhost:8080/v1/advertisement/1 
+curl -X PATCH http://localhost:8080/advertisement/1 
   -H "Content-Type: application/json" 
   -d '{"price": 18000}'
 
 # Поиск объявлений (фильтрация)
 
-curl "http://localhost:8080/v1/advertisement?q_title=велосипед&q_price_min=10000"
+curl "http://localhost:8080/advertisement?q_title=велосипед&q_price_min=10000"
 
 # Удалить объявление
 
-curl -X DELETE http://localhost:8080/v1/advertisement/1
+curl -X DELETE http://localhost:8080/advertisement/1
 
 ### Способ 3: Использование файла rest.http
 
@@ -79,7 +79,7 @@ curl -X DELETE http://localhost:8080/v1/advertisement/1
 
 ### Создать объявление
 
-POST http://localhost:8080/v1/advertisement
+POST http://localhost:8080/advertisement
 Content-Type: application/json
 
 {
@@ -91,11 +91,11 @@ Content-Type: application/json
 
 ### Получить объявление по ID (замените 1 на реальный ID из ответа выше)
 
-GET http://localhost:8080/v1/advertisement/1
+GET http://localhost:8080/advertisement/1
 
 ### Обновить объявление (PATCH)
 
-PATCH http://localhost:8080/v1/advertisement/1
+PATCH http://localhost:8080/advertisement/1
 Content-Type: application/json
 
 {
@@ -104,11 +104,11 @@ Content-Type: application/json
 
 ### Поиск объявлений по параметрам
 
-GET http://localhost:8080/v1/advertisement?q_title=Ноутбук&q_price_min=50000
+GET http://localhost:8080/advertisement?q_title=Ноутбук&q_price_min=50000
 
 ### Удалить объявление
 
-DELETE http://localhost:8080/v1/advertisement/1
+DELETE http://localhost:8080/advertisement/1
 
 ---
 
@@ -139,5 +139,5 @@ FastApi_DZ/
 ├── docker-compose.yaml   # Оркестрация контейнеров (API + PostgreSQL)
 ├── Dockerfile            # Инструкция для сборки образа API
 ├── requirements.txt      # Зависимости Python
-├── .env                  # Переменные окружения (не коммитить в Git!)
+├── .env.example          # Переменные окружения 
 └── README.md             # Этот файл
